@@ -6,8 +6,61 @@
   <title>Loyalty Page — Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* Instacart Sans — UI typeface (from @instacart/ids-core) */
+    @font-face {
+      font-family: 'Instacart Sans';
+      src: local('Instacart Sans Text v1.1'), local('Instacart Sans'),
+           url('fonts/instacart-sans.woff2') format('woff2-variations');
+      font-weight: 400 800;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Instacart Sans';
+      src: url('fonts/instacart-sans-italic.woff2') format('woff2-variations');
+      font-weight: 400 800;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Instacart Sans Fallback';
+      src: local('Arial'), local('ArialMT');
+      font-weight: 400;
+      size-adjust: 113.055%;
+      ascent-override: 79.6073%;
+      descent-override: 17.3367%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Instacart Sans Fallback';
+      src: local('Arial Bold'), local('Arial-BoldMT');
+      font-weight: 600;
+      size-adjust: 107.9211%;
+      ascent-override: 83.3943%;
+      descent-override: 18.1614%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Instacart Sans Fallback';
+      src: local('Arial Bold'), local('Arial-BoldMT');
+      font-weight: 700;
+      size-adjust: 110.4212%;
+      ascent-override: 81.5061%;
+      descent-override: 17.7502%;
+      line-gap-override: 0%;
+    }
+    @font-face {
+      font-family: 'Instacart Sans Fallback';
+      src: local('Arial Bold'), local('Arial-BoldMT');
+      font-weight: 800;
+      size-adjust: 113.5463%;
+      ascent-override: 79.2628%;
+      descent-override: 17.2617%;
+      line-gap-override: 0%;
+    }
+
     /* Idiqlat — Instacart brand display font; falls back to Georgia */
     @font-face {
       font-family: 'Idiqlat';
@@ -35,13 +88,14 @@
       --shadow-low:         0 1px 8px rgba(0,0,0,.08);
       --shadow-med:         0 2px 16px rgba(0,0,0,.12);
       --r-interactive:      8px;
-      --font:               'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font:               'Instacart Sans', 'Instacart Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--font);
+      font-variation-settings: "opsz" 8;
       background: #EAEAEA;
       height: 100vh;
       overflow: hidden;
@@ -51,7 +105,7 @@
 
     /* ─────────────── TOP CHROME BAR ─────────────── */
     .topbar {
-      height: 48px;
+      height: 56px;
       background: var(--gs-00);
       border-bottom: 1px solid var(--gs-20);
       display: flex;
@@ -115,10 +169,10 @@
     }
 
     .page-name__title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--gs-80);
-      line-height: 28px;
+      line-height: 22px;
       white-space: nowrap;
     }
 
@@ -148,9 +202,9 @@
 
     /* TDS Button — secondary */
     .btn {
-      height: 32px;
+      height: 28px;
       padding: 0 12px;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 600;
       font-family: var(--font);
@@ -195,35 +249,38 @@
       filter: drop-shadow(0px 1px 4px rgba(0,0,0,0.08));
     }
 
-    /* TDS Segment Switch (topbar — Design/Code) */
+    /* TDS Segment Switch (topbar — Design/Code) — pill style */
     .seg-switch {
       display: flex;
-      border: 1px solid var(--gs-20);
-      border-radius: 4px;
-      overflow: hidden;
-      height: 28px;
-      width: 172px;
+      background: #f0f0f0;
+      border-radius: 12px;
+      height: 40px;
+      padding: 6px;
+      gap: 0;
+      width: auto;
     }
     .seg-switch__tab {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
-      flex: 1;
-      padding: 0 8px;
+      height: 28px;
+      padding: 0 12px;
       font-size: 12px;
       font-weight: 600;
       font-family: var(--font);
       cursor: pointer;
-      border: 0.5px solid var(--gs-20);
-      background: var(--gs-00);
-      color: var(--brand-regular);
-      transition: background 0.12s, color 0.12s;
+      border: none;
+      background: transparent;
+      color: var(--gs-60);
+      border-radius: 8px;
+      transition: background 0.12s, color 0.12s, box-shadow 0.12s;
       white-space: nowrap;
     }
     .seg-switch__tab.active {
-      background: var(--brand-xlight);
-      color: var(--brand-dark);
+      background: var(--gs-00);
+      color: var(--brand-regular);
+      box-shadow: 0px 1px 4px rgba(0,0,0,0.08);
     }
 
     /* IDS-style icon-only device segmented switch */
@@ -312,15 +369,15 @@
       position: absolute;
       left: 24px;
       top: 24px;
-      width: 271px;
+      width: 280px;
       background: var(--gs-00);
       border-radius: var(--r-interactive);
       box-shadow: var(--shadow-low);
       z-index: 20;
-      padding: 16px 12px;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       max-height: calc(100% - 48px);
       overflow: hidden;
     }
@@ -329,20 +386,53 @@
       gap: 0;
     }
 
+    #outline-main-view {
+      padding: 16px 0;
+    }
+
     .outline-panel__head {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       min-height: 26px;
-      padding: 0 0 10px;
+      padding: 0 16px 8px 0;
     }
     .outline-panel__head-title {
       font-size: 15px;
       font-weight: 600;
       line-height: 20px;
       color: var(--gs-80);
+      padding-left: 16px;
+      padding-right: 16px;
     }
+    .outline-panel__head-collapse {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      color: var(--gs-60);
+      cursor: pointer;
+      border-radius: 4px;
+      flex-shrink: 0;
+      transition: background 0.1s;
+      padding: 0;
+    }
+    .outline-panel__head-collapse:hover { background: var(--gs-10); }
 
     .outline-divider {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      height: 16px;
+      width: 100%;
+    }
+    .outline-divider::before {
+      content: '';
+      display: block;
+      width: 100%;
       height: 1px;
       background: var(--gs-20);
     }
@@ -350,7 +440,7 @@
     .outline-sections {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 0;
     }
 
     .outline-section {
@@ -365,7 +455,7 @@
       color: var(--gs-50);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 10px 0 4px;
+      padding: 10px 16px 4px;
       line-height: 16px;
     }
 
@@ -373,7 +463,17 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      padding-left: 12px;
+      padding: 0 8px;
+      padding-right: 12px;
+    }
+
+    #outline-body-container,
+    #outline-body-sections {
+      padding-right: 12px;
+    }
+
+    .outline-section-group__items {
+      padding-right: 12px;
     }
 
     .outline-item {
@@ -420,6 +520,67 @@
       flex-shrink: 0;
       transition: transform 0.18s;
     }
+
+    /* Grab handle — appears on row hover */
+    .outline-item__grab {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--gs-40);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .outline-item:hover .outline-item__grab { opacity: 1; }
+
+    /* Icon slot: type icon visible by default, swaps to grab on hover */
+    .outline-item__icon-slot {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .outline-item__icon-slot .outline-item__grab {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .outline-item__type-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gs-40);
+      opacity: 1;
+      transition: opacity 0.1s;
+      pointer-events: none;
+    }
+    .outline-item:hover .outline-item__type-icon { opacity: 0; }
+
+    /* Options menu — appears on row hover */
+    .outline-item__opts {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gs-60);
+      flex-shrink: 0;
+      border-radius: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.1s, background 0.1s;
+      padding: 0;
+    }
+    .outline-item:hover .outline-item__opts { opacity: 1; }
+    .outline-item__opts:hover { background: var(--gs-10); }
 
     /* Visibility toggle — appears on row hover */
     .outline-item__vis {
@@ -509,6 +670,139 @@
       border-radius: 6px;
     }
     .outline-add-btn:hover { background: var(--brand-xlight); }
+
+    /* ─────── Page Structure: Section Groups ─────── */
+    .outline-section-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .outline-section-label-row {
+      display: flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.1s;
+      margin: 0;
+    }
+    .outline-section-label-row:hover { background: var(--gs-05); }
+    .outline-section-group--active .outline-section-label-row {
+      background: #786FFF;
+    }
+    .outline-section-label-row__text {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gs-60);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      flex: 1;
+      line-height: 16px;
+    }
+    .outline-section-group--active .outline-section-label-row__text { color: #FFFFFF; }
+    .outline-section-label-row__opts {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-radius: 4px;
+      color: var(--gs-50);
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.1s;
+    }
+    .outline-section-label-row__opts:hover { background: var(--gs-10); }
+    .outline-section-group--active .outline-section-label-row__opts { color: rgba(255,255,255,0.75); }
+    .outline-section-group--active .outline-section-label-row__opts:hover { background: rgba(255,255,255,0.15); }
+    .outline-section-group__items {
+      display: flex;
+      flex-direction: column;
+      padding: 2px 0 4px;
+    }
+    .outline-sub-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 28px;
+      padding: 0 8px 0 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.1s;
+      margin: 0 4px;
+    }
+    .outline-sub-item:hover { background: var(--gs-05); }
+    .outline-sub-item__drag {
+      width: 14px;
+      height: 14px;
+      color: var(--gs-30);
+      flex-shrink: 0;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .outline-sub-item:hover .outline-sub-item__drag { opacity: 1; }
+    .outline-sub-item__label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gs-70);
+      flex: 1;
+      line-height: 16px;
+    }
+    .outline-sub-item__opts {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-radius: 3px;
+      color: var(--gs-50);
+      padding: 0;
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity 0.1s, background 0.1s;
+    }
+    .outline-sub-item:hover .outline-sub-item__opts { opacity: 1; }
+    .outline-sub-item__opts:hover { background: var(--gs-10); }
+    .outline-section-add-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 28px;
+      padding: 0 8px 0 16px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand-regular);
+      background: none;
+      border: none;
+      font-family: var(--font);
+      transition: background 0.1s;
+      border-radius: 4px;
+      margin: 0 4px;
+    }
+    .outline-section-add-btn:hover { background: var(--brand-xlight); }
+    .outline-sub-item--locked .outline-sub-item__drag { display: none; }
+    .outline-sub-item__lock {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gs-30);
+    }
+    .outline-sub-item.active { background: var(--brand-xlight); }
+    .outline-sub-item.active .outline-sub-item__label { color: var(--gs-80); font-weight: 600; }
 
     /* ─────────────── MOBILE DEVICE FRAME ─────────────── */
     .device-frame {
@@ -1494,7 +1788,7 @@
     /* ── Add-section picker panel ── */
     .add-section-panel {
       position: absolute;
-      left: calc(24px + 271px + 12px); /* right of outline panel */
+      left: calc(24px + 280px + 12px); /* right of outline panel */
       top: 24px;
       width: 300px;
       background: var(--gs-00);
@@ -1643,7 +1937,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 16px 12px 10px;
+      padding: 16px 16px 10px;
       flex-shrink: 0;
     }
     .add-panel-header__back {
@@ -1700,7 +1994,7 @@
       padding: 14px 14px 6px;
     }
 
-    /* option rows (Pre-built sections / Custom section) */
+    /* option rows (Pre-built / Empty section / Custom code) */
     .add-option-row {
       display: flex; align-items: center; gap: 12px;
       padding: 10px 14px;
@@ -1973,6 +2267,24 @@
       position: relative;
       /* no background — inherits from the section container */
     }
+    .injected-block__delete {
+      display: none;
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      background: rgba(217,56,56,.9);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 11px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+    .injected-block:hover .injected-block__delete { display: flex; }
     @keyframes block-pop-in {
       0%   { opacity: 0; transform: translateY(6px); outline-color: rgba(79,70,229,.6); }
       30%  { opacity: 1; transform: translateY(0);   outline-color: rgba(79,70,229,.5); }
@@ -2018,61 +2330,38 @@
     .modal-btn--primary { background: #4F46E5; color: #fff; font-weight: 600; }
     .modal-btn--primary:hover { background: #4338CA; }
 
-    /* ── Drag-to-reorder ── */
-    .drag-handle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--gs-30);
-      cursor: grab;
-      border-radius: 3px;
-      transition: color 0.1s;
-    }
-    .drag-handle:hover { color: var(--gs-60); }
-    .drag-handle:active { cursor: grabbing; }
-
-    /* Handle in prop-panel rows — hidden until row is hovered */
-    .prop-drag-handle {
-      width: 14px;
-      height: 20px;
-      opacity: 0;
-      transition: opacity 0.12s, color 0.1s;
-    }
-    .prop-element-row:hover .prop-drag-handle { opacity: 1; }
-    .dragging-row { opacity: 0.4; cursor: grabbing; }
-
-    /* Handle inside the canvas chip — needs pointer-events to fire */
-    .block-drag-handle {
-      pointer-events: all;
-      opacity: 0.8;
-      width: 10px;
-      height: 12px;
-      margin-right: 3px;
-      flex-shrink: 0;
-    }
-    /* Make chip flex so grip + label sit side-by-side */
-    .canvas-el:hover .canvas-el-chip,
-    .canvas-el.el-selected .canvas-el-chip {
-      display: inline-flex;
-      align-items: center;
-    }
-    .dragging-block { opacity: 0.35; cursor: grabbing; }
-
-    /* Drop-position indicator line */
-    .drop-indicator {
-      height: 2px;
-      background: var(--brand-regular);
-      border-radius: 1px;
-      pointer-events: none;
-      flex-shrink: 0;
-    }
-    .drop-indicator--prop   { margin: -5px 0; }
-    .drop-indicator--canvas { width: 100%; }
-
   </style>
 </head>
 <body>
+
+  <!-- IDS icon sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="ids-icon-grab" viewBox="0 0 16 16">
+      <path d="M9.99935 3.25594C10.3234 3.25594 10.586 2.99328 10.586 2.66927C10.586 2.34526 10.3234 2.0826 9.99935 2.0826C9.67534 2.0826 9.41268 2.34526 9.41268 2.66927C9.41268 2.99328 9.67534 3.25594 9.99935 3.25594Z" fill="currentColor"/>
+      <path d="M9.99935 1.33594C9.26602 1.33594 8.66602 1.93594 8.66602 2.66927C8.66602 3.4026 9.26602 4.0026 9.99935 4.0026C10.7327 4.0026 11.3327 3.4026 11.3327 2.66927C11.3327 1.93594 10.7327 1.33594 9.99935 1.33594Z" fill="currentColor"/>
+      <path d="M9.99935 8.58927C10.3234 8.58927 10.586 8.32661 10.586 8.0026C10.586 7.6786 10.3234 7.41594 9.99935 7.41594C9.67534 7.41594 9.41268 7.6786 9.41268 8.0026C9.41268 8.32661 9.67534 8.58927 9.99935 8.58927Z" fill="currentColor"/>
+      <path d="M9.99935 6.66927C9.26602 6.66927 8.66602 7.26927 8.66602 8.0026C8.66602 8.73594 9.26602 9.33594 9.99935 9.33594C10.7327 9.33594 11.3327 8.73594 11.3327 8.0026C11.3327 7.26927 10.7327 6.66927 9.99935 6.66927Z" fill="currentColor"/>
+      <path d="M9.99935 13.9226C10.3234 13.9226 10.586 13.6599 10.586 13.3359C10.586 13.0119 10.3234 12.7493 9.99935 12.7493C9.67534 12.7493 9.41268 13.0119 9.41268 13.3359C9.41268 13.6599 9.67534 13.9226 9.99935 13.9226Z" fill="currentColor"/>
+      <path d="M9.99935 12.0026C9.26602 12.0026 8.66602 12.6026 8.66602 13.3359C8.66602 14.0693 9.26602 14.6693 9.99935 14.6693C10.7327 14.6693 11.3327 14.0693 11.3327 13.3359C11.3327 12.6026 10.7327 12.0026 9.99935 12.0026Z" fill="currentColor"/>
+      <path d="M5.99935 3.25594C6.32336 3.25594 6.58602 2.99328 6.58602 2.66927C6.58602 2.34526 6.32336 2.0826 5.99935 2.0826C5.67534 2.0826 5.41268 2.34526 5.41268 2.66927C5.41268 2.99328 5.67534 3.25594 5.99935 3.25594Z" fill="currentColor"/>
+      <path d="M5.99935 1.33594C5.26602 1.33594 4.66602 1.93594 4.66602 2.66927C4.66602 3.4026 5.26602 4.0026 5.99935 4.0026C6.73268 4.0026 7.33268 3.4026 7.33268 2.66927C7.33268 1.93594 6.73268 1.33594 5.99935 1.33594Z" fill="currentColor"/>
+      <path d="M5.99935 8.58927C6.32336 8.58927 6.58602 8.32661 6.58602 8.0026C6.58602 7.6786 6.32336 7.41594 5.99935 7.41594C5.67534 7.41594 5.41268 7.6786 5.41268 8.0026C5.41268 8.32661 5.67534 8.58927 5.99935 8.58927Z" fill="currentColor"/>
+      <path d="M5.99935 6.66927C5.26602 6.66927 4.66602 7.26927 4.66602 8.0026C4.66602 8.73594 5.26602 9.33594 5.99935 9.33594C6.73268 9.33594 7.33268 8.73594 7.33268 8.0026C7.33268 7.26927 6.73268 6.66927 5.99935 6.66927Z" fill="currentColor"/>
+      <path d="M5.99935 13.9226C6.32336 13.9226 6.58602 13.6599 6.58602 13.3359C6.58602 13.0119 6.32336 12.7493 5.99935 12.7493C5.67534 12.7493 5.41268 13.0119 5.41268 13.3359C5.41268 13.6599 5.67534 13.9226 5.99935 13.9226Z" fill="currentColor"/>
+      <path d="M5.99935 12.0026C5.26602 12.0026 4.66602 12.6026 4.66602 13.3359C4.66602 14.0693 5.26602 14.6693 5.99935 14.6693C6.73268 14.6693 7.33268 14.0693 7.33268 13.3359C7.33268 12.6026 6.73268 12.0026 5.99935 12.0026Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ids-icon-options" viewBox="0 0 16 16">
+      <path d="M4.66667 7.9974C4.66667 8.73378 4.06971 9.33073 3.33333 9.33073C2.59695 9.33073 2 8.73378 2 7.9974C2 7.26102 2.59695 6.66406 3.33333 6.66406C4.06971 6.66406 4.66667 7.26102 4.66667 7.9974Z" fill="currentColor"/>
+      <path d="M9.33333 7.9974C9.33333 8.73378 8.73638 9.33073 8 9.33073C7.26362 9.33073 6.66667 8.73378 6.66667 7.9974C6.66667 7.26102 7.26362 6.66406 8 6.66406C8.73638 6.66406 9.33333 7.26102 9.33333 7.9974Z" fill="currentColor"/>
+      <path d="M12.6667 9.33073C13.403 9.33073 14 8.73378 14 7.9974C14 7.26102 13.403 6.66406 12.6667 6.66406C11.9303 6.66406 11.3333 7.26102 11.3333 7.9974C11.3333 8.73378 11.9303 9.33073 12.6667 9.33073Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ids-icon-locked" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M5.99935 4.66927C5.99935 3.5647 6.89478 2.66927 7.99935 2.66927C9.10392 2.66927 9.99935 3.5647 9.99935 4.66927V6.0026H5.99935V4.66927ZM4.66602 6.0026V4.66927C4.66602 2.82832 6.1584 1.33594 7.99935 1.33594C9.8403 1.33594 11.3327 2.82832 11.3327 4.66927V6.0026H13.3327V14.6693H2.66602V6.0026H4.66602ZM9.33268 9.33593C9.33268 9.82945 9.06455 10.2604 8.66602 10.4909V12.6693H7.33268V10.4909C6.93415 10.2604 6.66602 9.82945 6.66602 9.33593C6.66602 8.59955 7.26297 8.0026 7.99935 8.0026C8.73573 8.0026 9.33268 8.59955 9.33268 9.33593Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="ids-icon-collapse" viewBox="0 0 24 24">
+      <path d="M10.5 21.5H8.5V16.9141L4.70703 20.707L3.29297 19.293L7.08594 15.5H2.5V13.5H10.5V21.5ZM15.5 7.08594L19.293 3.29297L20.707 4.70703L16.9141 8.5H21.5V10.5H13.5V2.5H15.5V7.08594Z" fill="currentColor"/>
+    </symbol>
+  </svg>
 
   <!-- ══════════ TOP BAR ══════════ -->
   <div class="topbar">
@@ -2084,8 +2373,14 @@
         </svg>
       </button>
       <div class="page-name">
-        <span class="page-name__title">Home</span>
-        <span class="marker marker--neutral">Draft</span>
+        <svg width="16" height="22" viewBox="0 0 16 22" fill="none" style="flex-shrink:0">
+          <path d="M7.99913 13C11.8505 13 15.0079 15.8746 14.9991 20H0.999941C0.992141 15.8766 4.14833 13 7.99913 13Z" fill="#FF7009"/>
+          <path d="M13.7728 3.24361C12.8884 3.24361 12.2582 3.62901 11.6762 4.46541L10 6.87361V0H6.00001V6.87361L4.32381 4.46541C3.74181 3.62901 3.11162 3.24361 2.22722 3.24361C0.89282 3.24361 0.00442189 4.22881 2.19026e-05 5.44261C-0.00377809 6.48261 0.486821 7.15981 1.52002 7.82501L8 12L14.48 7.82501C15.5126 7.15981 16.0032 6.48221 16 5.44261C15.9956 4.22881 15.1072 3.24361 13.7728 3.24361Z" fill="#0AAD0A"/>
+        </svg>
+        <span class="page-name__title">Loyalty page</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0009 12.5205L7.7929 8.3125L6.20898 9.89642L12.0009 15.6884L17.7929 9.89642L16.209 8.3125L12.0009 12.5205Z" fill="#242529"/>
+        </svg>
       </div>
     </div>
 
@@ -2223,7 +2518,8 @@
       </div>
     </div><!-- /template-dropdown -->
 
-      <button class="btn btn--secondary">Save</button>
+      <button class="btn btn--secondary">Preview</button>
+      <button class="btn btn--secondary">Save draft</button>
       <button class="btn btn--primary">Publish</button>
     </div><!-- /topbar__right -->
   </div>
@@ -2289,141 +2585,98 @@
     <div class="outline-panel" id="outline-panel">
 
       <!-- VIEW: Outline -->
-      <div id="outline-main-view" style="display:flex;flex-direction:column;gap:8px;flex:1;overflow-y:auto;">
+      <div id="outline-main-view" style="display:flex;flex-direction:column;gap:0;flex:1;overflow-y:auto;">
 
       <!-- Heading -->
       <div class="outline-panel__head">
-        <span class="outline-panel__head-title">Outline</span>
+        <span class="outline-panel__head-title">Page structure</span>
+        <button class="outline-panel__head-collapse" title="Collapse panel">
+          <svg width="16" height="16"><use href="#ids-icon-collapse"/></svg>
+        </button>
       </div>
 
       <div class="outline-divider"></div>
 
       <div class="outline-sections">
 
-        <!-- HEADER section -->
-        <div class="outline-section">
-          <div class="outline-section__label">Header</div>
-          <div class="outline-section-container">
-            <div class="outline-item" onclick="selectSection(this, 'navigation')">
-              <span class="outline-item__icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2.5 4.5H13.5M2.5 8H11M2.5 11.5H12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                </svg>
-              </span>
-              <span class="outline-item__label">Navigation</span>
-              <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </button>
+        <!-- HEADER -->
+        <div class="outline-section-group" data-section-id="header">
+          <div class="outline-section-label-row">
+            <span class="outline-section-label-row__text">Header</span>
+            <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+          </div>
+          <div class="outline-section-group__items">
+            <div class="outline-sub-item outline-sub-item--locked" data-section-id="navigation" onclick="selectSection(this, 'navigation')">
+              <span class="outline-sub-item__lock"><svg width="16" height="16"><use href="#ids-icon-locked"/></svg></span>
+              <span class="outline-sub-item__label">Navigation</span>
+              <button class="outline-sub-item__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
             </div>
-            <button class="outline-add-btn" onclick="openAddPanel()">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="8" fill="#0A5546"/>
-                <path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-              Add section
+            <button class="outline-section-add-btn" onclick="openAddPanel()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Add
             </button>
           </div>
         </div>
 
         <div class="outline-divider"></div>
 
-        <!-- BODY section -->
-        <div class="outline-section">
-          <div class="outline-section__label">Body</div>
-          <div class="outline-section-container" id="outline-body-container">
+        <div id="outline-body-sections">
 
-            <div class="outline-item" id="outline-hero" onclick="selectSection(this, 'hero')">
-              <span class="outline-item__icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2.5 4.5H13.5M2.5 8H11M2.5 11.5H12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                </svg>
-              </span>
-              <span class="outline-item__label">Hero</span>
-              <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </button>
+          <div class="outline-section-group" id="outline-group-hero" data-section-id="hero">
+            <div class="outline-section-label-row" onclick="selectSectionGroup('hero')">
+              <span class="outline-section-label-row__text">Hero</span>
+              <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
             </div>
-
-            <div class="outline-item" onclick="selectSection(this, 'weekly')">
-              <span class="outline-item__icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2.5 4.5H13.5M2.5 8H11M2.5 11.5H12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                </svg>
-              </span>
-              <span class="outline-item__label">Featured Products</span>
-              <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </button>
-            </div>
-
-            <div class="outline-item" onclick="selectSection(this, 'curated')">
-              <span class="outline-item__icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M2.5 4.5H13.5M2.5 8H11M2.5 11.5H12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-                </svg>
-              </span>
-              <span class="outline-item__label">Curated deals</span>
-              <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </button>
-            </div>
-
-            <div class="outline-item" onclick="selectSection(this, 'about')">
-              <span class="outline-item__icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <rect x="2" y="3" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/>
-                  <path d="M5 6.5h6M5 9h4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
-                </svg>
-              </span>
-              <span class="outline-item__label">About us</span>
-              <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </button>
-            </div>
-
-            <button class="outline-add-btn" id="outline-body-add-btn" onclick="openAddPanel()">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="8" fill="#0A5546"/>
-                <path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-              Add section
-            </button>
-
           </div>
-        </div>
+
+          <div class="outline-divider"></div>
+
+          <div class="outline-section-group" id="outline-group-weekly" data-section-id="weekly">
+            <div class="outline-section-label-row" onclick="selectSectionGroup('weekly')">
+              <span class="outline-section-label-row__text">Featured Products</span>
+              <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+            </div>
+          </div>
+
+          <div class="outline-divider"></div>
+
+          <div class="outline-section-group" id="outline-group-curated" data-section-id="curated">
+            <div class="outline-section-label-row" onclick="selectSectionGroup('curated')">
+              <span class="outline-section-label-row__text">Curated deals</span>
+              <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+            </div>
+          </div>
+
+          <div class="outline-divider"></div>
+
+          <div class="outline-section-group" id="outline-group-about" data-section-id="about">
+            <div class="outline-section-label-row" onclick="selectSectionGroup('about')">
+              <span class="outline-section-label-row__text">About us</span>
+              <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+            </div>
+          </div>
+
+        </div><!-- /outline-body-sections -->
 
         <div class="outline-divider"></div>
 
-        <!-- FOOTER section -->
-        <div class="outline-section">
-          <div class="outline-section__label">Footer</div>
-          <div class="outline-section-container">
-            <button class="outline-add-btn" onclick="openAddPanel()">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="8" fill="#0A5546"/>
-                <path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-              Add section
+        <!-- FOOTER -->
+        <div class="outline-section-group" data-section-id="footer">
+          <div class="outline-section-label-row" onclick="selectSectionGroup('footer')">
+            <span class="outline-section-label-row__text">Footer</span>
+            <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+          </div>
+          <div class="outline-section-group__items">
+            <button class="outline-section-add-btn" onclick="openAddPanel()">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Add
             </button>
           </div>
         </div>
 
       </div><!-- /outline-sections -->
+
+
 
       </div><!-- /outline-main-view -->
 
@@ -2457,11 +2710,22 @@
 
           <button class="add-option-row" onclick="showSectionView('scratch')">
             <div class="add-option-row__icon">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.3" stroke-dasharray="3 2"/><path d="M9 6v6M6 9h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 13l2.5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".6"/><path d="M10.5 4l-3 7" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".4"/></svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.3" stroke-dasharray="3 2"/><path d="M9 6v6M6 9h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
             </div>
             <div class="add-option-row__body">
-              <div class="add-option-row__title">Custom section</div>
-              <div class="add-option-row__desc">Build from scratch with blocks or custom code</div>
+              <div class="add-option-row__title">Empty section</div>
+              <div class="add-option-row__desc">Add blocks to build from scratch</div>
+            </div>
+            <svg class="add-option-row__chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 3.5L9 7L5.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+
+          <button class="add-option-row" onclick="showSectionView('code')">
+            <div class="add-option-row__icon">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6 5L2 9l4 4M12 5l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 4l-3 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".5"/></svg>
+            </div>
+            <div class="add-option-row__body">
+              <div class="add-option-row__title">Custom code</div>
+              <div class="add-option-row__desc">Write your own HTML &amp; CSS</div>
             </div>
             <svg class="add-option-row__chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 3.5L9 7L5.5 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
           </button>
@@ -2635,7 +2899,7 @@
           <button class="add-panel-header__back" onclick="showSectionView('main')" aria-label="Back">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3L5 7L9 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <span class="add-panel-header__title">Add element</span>
+          <span class="add-panel-header__title">Empty section</span>
           <button class="add-panel-header__close" onclick="closeAddPanel()">
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
@@ -2701,7 +2965,7 @@
     <!-- ── Add panel ── -->
     <div class="add-element-panel" id="add-element-panel">
       <div class="add-panel-header">
-        <span class="add-panel-header__title">Add element</span>
+        <span class="add-panel-header__title">Add block</span>
         <button class="add-panel-header__close" onclick="closeAddElementPanel()" aria-label="Close">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
@@ -2909,7 +3173,7 @@
             Featured Products
           </div>
           <!-- Horizontal scrolling pairs — 2 per row, 2 rows visible -->
-          <div id="weekly-carousel-el" class="canvas-el" onclick="selectCanvasElement(this,'weekly','carousel','Product carousel',event)" style="display:flex;align-items:flex-start;overflow:hidden;width:100%;position:relative;">
+          <div class="canvas-el" onclick="selectCanvasElement(this,'weekly','carousel','Product carousel',event)" style="display:flex;align-items:flex-start;overflow:hidden;width:100%;position:relative;">
             <span class="canvas-el-chip">Product carousel</span>
             <!-- Pair 1 -->
             <div style="flex-shrink:0;padding:10px 12px 10px 0;display:flex;gap:12px;">
@@ -2992,7 +3256,7 @@
             <span class="canvas-el-chip">Section header</span>
             Curated deals
           </div>
-          <div id="curated-carousel-el" class="canvas-el" onclick="selectCanvasElement(this,'curated','carousel','Product carousel',event)" style="display:flex;gap:14px;align-items:stretch;overflow:hidden;position:relative;">
+          <div class="canvas-el" onclick="selectCanvasElement(this,'curated','carousel','Product carousel',event)" style="display:flex;gap:14px;align-items:stretch;overflow:hidden;position:relative;">
             <span class="canvas-el-chip">Product carousel</span>
 
             <!-- Curated card 1 -->
@@ -3282,7 +3546,7 @@
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <path d="M7 2.5V11.5M2.5 7H11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
-        Add element
+        Add block
       </button>
       <button class="section-actions-popup__btn section-actions-popup__btn--danger">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -3377,30 +3641,30 @@
           <div class="props-divider"></div>
 
           <div class="props-fields-group">
-            <div class="props-section-label">Elements</div>
-            <div class="prop-element-row" onclick="openElementPanel('hero','image','Image')" data-element="image" data-canvas-el="hero-section">
+            <div class="props-section-label">Blocks</div>
+            <div class="prop-element-row" onclick="openElementPanel('hero','image','Image')" data-element="image">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 10.5L5 7.5L8 10L10.5 7.5L14.5 11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.5" cy="6" r="1.2" fill="currentColor"/></svg>
               <span class="prop-element-row__label">Image</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="prop-element-row" onclick="openElementPanel('hero','headline','Headline')" data-element="headline" data-canvas-el="hero-headline-el">
+            <div class="prop-element-row" onclick="openElementPanel('hero','headline','Headline')" data-element="headline">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4H13M8 4V13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
               <span class="prop-element-row__label">Headline</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="prop-element-row" onclick="openElementPanel('hero','text','Text')" data-element="text" data-canvas-el="hero-text-el">
+            <div class="prop-element-row" onclick="openElementPanel('hero','text','Text')" data-element="text">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4.5H14M2 8H11M2 11.5H13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
               <span class="prop-element-row__label">Text</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="prop-element-row" onclick="openElementPanel('hero','button','Button')" data-element="button" data-canvas-el="hero-button-el">
+            <div class="prop-element-row" onclick="openElementPanel('hero','button','Button')" data-element="button">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="5" width="13" height="6" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8H10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
               <span class="prop-element-row__label">Button</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <button class="outline-add-btn" style="padding:6px 4px;" onclick="openAddElementPanel('hero','Hero')">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Add element
+              Add block
             </button>
           </div>
         </div><!-- /view-hero -->
@@ -3430,6 +3694,23 @@
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
               Browse creative library
             </button>
+            <div class="image-ai-card">
+              <div class="image-ai-card__header">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="color:#7A52CC;flex-shrink:0">
+                  <path d="M9.5 2L10.7 5.3L14 6.5L10.7 7.7L9.5 11L8.3 7.7L5 6.5L8.3 5.3L9.5 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                  <path d="M4 10L4.6 11.4L6 12L4.6 12.6L4 14L3.4 12.6L2 12L3.4 11.4L4 10Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+                <span class="image-ai-card__label">Generate with AI</span>
+              </div>
+              <textarea class="prop-textarea" rows="3" placeholder="Describe the image you want…" style="border-radius:6px;font-size:12px;">Generate an image of Memorial Day BBQ theme</textarea>
+              <button class="prop-ai-btn" style="height:32px;font-size:12px;border-radius:6px;">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <path d="M9.5 2L10.7 5.3L14 6.5L10.7 7.7L9.5 11L8.3 7.7L5 6.5L8.3 5.3L9.5 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                  <path d="M4 10L4.6 11.4L6 12L4.6 12.6L4 14L3.4 12.6L2 12L3.4 11.4L4 10Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+                Generate image
+              </button>
+            </div>
           </div>
           <div class="props-divider"></div>
           <div class="props-fields-group">
@@ -3603,14 +3884,6 @@
           <div class="props-fields-group">
             <div class="props-section-label">Layout</div>
             <div class="props-field">
-              <div class="props-field-label">Text alignment</div>
-              <div class="prop-seg">
-                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Left</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Center</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Right</button>
-              </div>
-            </div>
-            <div class="props-field">
               <div class="props-field-label">Spacing</div>
               <div class="prop-seg">
                 <button class="prop-seg__btn" onclick="setSpacing(this,'weekly-section','compact')">Compact</button>
@@ -3640,13 +3913,13 @@
           <div class="props-divider"></div>
 
           <div class="props-fields-group">
-            <div class="props-section-label">Elements</div>
-            <div class="prop-element-row" onclick="openElementPanel('weekly','header','Section header')" data-element="weekly-header" data-canvas-el="weekly-header-el">
+            <div class="props-section-label">Blocks</div>
+            <div class="prop-element-row" onclick="openElementPanel('weekly','header','Section header')" data-element="weekly-header">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4H13M8 4V13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
               <span class="prop-element-row__label">Section header</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="prop-element-row" onclick="openElementPanel('weekly','carousel','Product carousel')" data-element="weekly-carousel" data-canvas-el="weekly-carousel-el">
+            <div class="prop-element-row" onclick="openElementPanel('weekly','carousel','Product carousel')" data-element="weekly-carousel">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
               <span class="prop-element-row__label">Product carousel</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -3654,7 +3927,7 @@
 
             <button class="outline-add-btn" style="padding:6px 4px;" onclick="openAddElementPanel('weekly','Featured Products')">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Add element
+              Add block
             </button>
           </div>
         </div><!-- /view-weekly -->
@@ -3694,16 +3967,17 @@
         <!-- Weekly: Product carousel element -->
         <div class="section-view element-view" id="view-weekly-carousel" style="display:none">
 
-          <!-- Content type -->
+          <!-- Product source -->
           <div class="props-fields-group">
-            <div class="props-section-label">Content type</div>
+            <div class="props-section-label">Product source</div>
             <div class="prop-seg">
-              <button class="prop-seg__btn active" onclick="switchCarouselMode(this,'weekly','fixed')">Static</button>
+              <button class="prop-seg__btn active" onclick="switchCarouselMode(this,'weekly','auto')">Best match</button>
+              <button class="prop-seg__btn" onclick="switchCarouselMode(this,'weekly','fixed')">Collection</button>
               <button class="prop-seg__btn" onclick="switchCarouselMode(this,'weekly','dynamic')">Dynamic</button>
             </div>
 
-            <!-- (removed: Best match mode) -->
-            <div class="source-mode-panel" id="weekly-source-auto" hidden>
+            <!-- Best match mode (default) -->
+            <div class="source-mode-panel" id="weekly-source-auto">
               <div class="auto-resolved-card">
                 <div class="auto-resolved-card__label">
                   <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
@@ -3717,8 +3991,8 @@
               </div>
             </div>
 
-            <!-- Static mode (default) -->
-            <div class="source-mode-panel" id="weekly-source-fixed">
+            <!-- Collection mode (hidden by default) -->
+            <div class="source-mode-panel" id="weekly-source-fixed" hidden>
               <div class="props-field">
                 <div class="props-field-label">Collection</div>
                 <select class="prop-select">
@@ -3811,19 +4085,11 @@
           <div class="props-fields-group">
             <div class="props-section-label">Layout</div>
             <div class="props-field">
-              <div class="props-field-label">Text alignment</div>
+              <div class="props-field-label">Card style</div>
               <div class="prop-seg">
-                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Left</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Center</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Right</button>
-              </div>
-            </div>
-            <div class="props-field">
-              <div class="props-field-label">Spacing</div>
-              <div class="prop-seg">
+                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Standard</button>
                 <button class="prop-seg__btn" onclick="toggleSeg(this)">Compact</button>
-                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Normal</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Spacious</button>
+                <button class="prop-seg__btn" onclick="toggleSeg(this)">Feature</button>
               </div>
             </div>
             <div class="props-field">
@@ -3848,13 +4114,13 @@
           <div class="props-divider"></div>
 
           <div class="props-fields-group">
-            <div class="props-section-label">Elements</div>
-            <div class="prop-element-row" onclick="openElementPanel('curated','header','Section header')" data-element="curated-header" data-canvas-el="curated-header-el">
+            <div class="props-section-label">Blocks</div>
+            <div class="prop-element-row" onclick="openElementPanel('curated','header','Section header')" data-element="curated-header">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4H13M8 4V13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
               <span class="prop-element-row__label">Section header</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="prop-element-row" onclick="openElementPanel('curated','carousel','Product carousel')" data-element="curated-carousel" data-canvas-el="curated-carousel-el">
+            <div class="prop-element-row" onclick="openElementPanel('curated','carousel','Product carousel')" data-element="curated-carousel">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
               <span class="prop-element-row__label">Product carousel</span>
               <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -3862,7 +4128,7 @@
 
             <button class="outline-add-btn" style="padding:6px 4px;" onclick="openAddElementPanel('curated','Curated deals')">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Add element
+              Add block
             </button>
           </div>
         </div><!-- /view-curated -->
@@ -3902,16 +4168,17 @@
         <!-- Curated: Product carousel element -->
         <div class="section-view element-view" id="view-curated-carousel" style="display:none">
 
-          <!-- Content type -->
+          <!-- Product source -->
           <div class="props-fields-group">
-            <div class="props-section-label">Content type</div>
+            <div class="props-section-label">Product source</div>
             <div class="prop-seg">
-              <button class="prop-seg__btn active" onclick="switchCarouselMode(this,'curated','fixed')">Static</button>
+              <button class="prop-seg__btn active" onclick="switchCarouselMode(this,'curated','auto')">Best match</button>
+              <button class="prop-seg__btn" onclick="switchCarouselMode(this,'curated','fixed')">Collection</button>
               <button class="prop-seg__btn" onclick="switchCarouselMode(this,'curated','dynamic')">Dynamic</button>
             </div>
 
-            <!-- (removed: Best match mode) -->
-            <div class="source-mode-panel" id="curated-source-auto" hidden>
+            <!-- Best match mode (default) -->
+            <div class="source-mode-panel" id="curated-source-auto">
               <div class="auto-resolved-card">
                 <div class="auto-resolved-card__label">
                   <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
@@ -3925,8 +4192,8 @@
               </div>
             </div>
 
-            <!-- Static mode (default) -->
-            <div class="source-mode-panel" id="curated-source-fixed">
+            <!-- Collection mode (hidden by default) -->
+            <div class="source-mode-panel" id="curated-source-fixed" hidden>
               <div class="props-field">
                 <div class="props-field-label">Collection</div>
                 <select class="prop-select">
@@ -4153,7 +4420,7 @@
           <div class="props-divider"></div>
 
           <div class="props-fields-group">
-            <div class="props-section-label">Elements</div>
+            <div class="props-section-label">Blocks</div>
             <div class="prop-element-row">
               <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 10.5L5 7.5L8 10L10.5 7.5L14.5 11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.5" cy="6" r="1.2" fill="currentColor"/></svg>
               <span class="prop-element-row__label">Logo</span>
@@ -4171,42 +4438,6 @@
             </div>
           </div>
         </div><!-- /view-footer -->
-
-        <!-- ── Generic injected-block view (reused for all added blocks) ── -->
-        <div class="section-view element-view" id="view-injected-block" style="display:none">
-          <div class="props-fields-group">
-            <div class="props-section-label">Style</div>
-            <div class="props-field">
-              <div class="props-field-label">Alignment</div>
-              <div class="prop-seg">
-                <button class="prop-seg__btn active" onclick="setInjectedBlockAlign(this,'left')">Left</button>
-                <button class="prop-seg__btn" onclick="setInjectedBlockAlign(this,'center')">Center</button>
-                <button class="prop-seg__btn" onclick="setInjectedBlockAlign(this,'right')">Right</button>
-              </div>
-            </div>
-            <div class="props-field">
-              <div class="props-field-label">Padding</div>
-              <div class="prop-seg">
-                <button class="prop-seg__btn" onclick="setInjectedBlockPadding(this,'4px 0')">Compact</button>
-                <button class="prop-seg__btn active" onclick="setInjectedBlockPadding(this,'10px 0')">Normal</button>
-                <button class="prop-seg__btn" onclick="setInjectedBlockPadding(this,'20px 0')">Spacious</button>
-              </div>
-            </div>
-          </div>
-          <div class="props-divider"></div>
-          <div class="props-fields-group">
-            <div class="prop-toggle-row">
-              <span class="prop-toggle-label">Visible</span>
-              <label class="prop-toggle"><input type="checkbox" checked id="injected-block-vis-toggle" onchange="setInjectedBlockVisible(this.checked)" /><span class="prop-toggle__track"></span></label>
-            </div>
-          </div>
-          <div class="props-divider"></div>
-          <div class="props-fields-group">
-            <button onclick="removeSelectedInjectedBlock()" style="width:100%;padding:8px;border:1px solid #D93838;border-radius:6px;background:none;color:#D93838;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;">
-              Remove block
-            </button>
-          </div>
-        </div><!-- /view-injected-block -->
 
       </div><!-- /props-panel__inner -->
     </div><!-- /props-panel -->
@@ -4413,7 +4644,6 @@
 
     // Track selected canvas element
     let selectedCanvasEl = null;
-    let _selectedInjectedBlock = null;
 
     /* ── Inline text editing ── */
     let inlineEditEl = null;
@@ -4430,18 +4660,6 @@
 
       el.setAttribute('contenteditable', 'true');
       el.focus();
-
-      // <button> intercepts Space to fire a click instead of inserting a character.
-      // Catch it at keydown and insert the space manually.
-      if (el.tagName === 'BUTTON') {
-        el._editSpaceHandler = e => {
-          if (e.key === ' ') {
-            e.preventDefault();
-            document.execCommand('insertText', false, ' ');
-          }
-        };
-        el.addEventListener('keydown', el._editSpaceHandler);
-      }
 
       // Place caret at end of the last text node (skipping the chip)
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
@@ -4472,10 +4690,6 @@
       el.removeAttribute('contenteditable');
       el.classList.remove('el-editing');
       el.removeEventListener('input', _syncEditToPanel);
-      if (el._editSpaceHandler) {
-        el.removeEventListener('keydown', el._editSpaceHandler);
-        delete el._editSpaceHandler;
-      }
       const chip = el.querySelector('.canvas-el-chip');
       if (chip) chip.removeAttribute('contenteditable');
     }
@@ -4489,17 +4703,13 @@
         ? fullText.slice(chipText.length).trim()
         : fullText.trim();
 
-      // Update the first visible text input or textarea in the panel (skip URL fields)
-      const input = document.querySelector(
-        '#props-panel .section-view:not([style*="display: none"]) .prop-input[type="text"]:not([placeholder="https://"]), ' +
-        '#props-panel .section-view:not([style*="display: none"]) .prop-textarea'
-      );
+      // Update the first visible text input or textarea in the panel
+      const input = document.querySelector('#props-panel .section-view:not([style*="display: none"]) .prop-input[type="text"], #props-panel .section-view:not([style*="display: none"]) .prop-textarea');
       if (input) input.value = text;
     }
 
     function selectCanvasElement(el, sectionId, elementKey, elementLabel, event) {
       event.stopPropagation(); // don't bubble up to the section-hover-zone click
-      actionsPopup.classList.remove('visible');
 
       // If clicking a different element while editing, stop the previous edit
       if (inlineEditEl && inlineEditEl !== el) stopInlineEdit();
@@ -4534,8 +4744,6 @@
       _showSectionHeader();
       // Clear canvas element highlight
       if (selectedCanvasEl) { selectedCanvasEl.classList.remove('el-selected'); selectedCanvasEl = null; }
-      // Clear injected block highlight
-      if (_selectedInjectedBlock) { _selectedInjectedBlock.classList.remove('el-selected'); _selectedInjectedBlock = null; }
     }
 
     /* ── Drill into an element ── */
@@ -4584,7 +4792,6 @@
       document.getElementById('props-tabs-bar').style.display = 'flex';
       document.querySelectorAll('.prop-element-row').forEach(r => r.classList.remove('element-active'));
       if (selectedCanvasEl) { selectedCanvasEl.classList.remove('el-selected'); selectedCanvasEl = null; }
-      if (_selectedInjectedBlock) { _selectedInjectedBlock.classList.remove('el-selected'); _selectedInjectedBlock = null; }
     }
 
     function toggleSeg(btn) {
@@ -4697,69 +4904,12 @@
       'Product carousel': {
         outlineLabel: 'Product Carousel',
         sectionKey: 'product-carousel',
-        propsView: (sectionKey, label) => `
-          <div class="props-fields-group">
-            <div class="props-section-label">Layout</div>
-            <div class="props-field">
-              <div class="props-field-label">Text alignment</div>
-              <div class="prop-seg">
-                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Left</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Center</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Right</button>
-              </div>
-            </div>
-            <div class="props-field">
-              <div class="props-field-label">Spacing</div>
-              <div class="prop-seg">
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Compact</button>
-                <button class="prop-seg__btn active" onclick="toggleSeg(this)">Normal</button>
-                <button class="prop-seg__btn" onclick="toggleSeg(this)">Spacious</button>
-              </div>
-            </div>
-            <div class="props-field">
-              <div class="props-field-label">Background</div>
-              <div class="prop-color-row">
-                <div class="prop-color-swatch">
-                  <div class="prop-color-circle" style="background:#278657;"></div>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="color:var(--gs-60)"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <div class="prop-color-text">
-                  <span class="prop-color-name">Brand primary</span>
-                  <span class="prop-color-hex">#278657</span>
-                </div>
-              </div>
-            </div>
-            <div class="prop-toggle-row">
-              <span class="prop-toggle-label">Full-width section</span>
-              <label class="prop-toggle"><input type="checkbox" checked /><span class="prop-toggle__track"></span></label>
-            </div>
-          </div>
-
-          <div class="props-divider"></div>
-
-          <div class="props-fields-group">
-            <div class="props-section-label">Elements</div>
-            <div class="prop-element-row" data-canvas-el="${sectionKey}-header">
-              <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4H13M8 4V13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-              <span class="prop-element-row__label">Headline</span>
-              <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="prop-element-row" data-canvas-el="${sectionKey}-carousel">
-              <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
-              <span class="prop-element-row__label">Product carousel</span>
-              <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <button class="outline-add-btn js-add-block-btn" style="padding:6px 4px;">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#0A5546"/><path d="M8 5V11M5 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Add element
-            </button>
-          </div>`,
-        html: (sectionKey) => `
+        html: `
           <span class="section-hover-label">Product Carousel</span>
           ${_SECTION_REORDER_BTNS}
           <div style="background:#fff;padding:16px 0 16px 16px;">
-            <div id="${sectionKey}-header" style="font-family:'Idiqlat',Georgia,serif;font-size:28px;font-weight:400;color:#278657;margin-bottom:4px;padding-right:16px;">New Arrivals</div>
-            <div id="${sectionKey}-carousel" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;padding-right:16px;scrollbar-width:none;">
+            <div style="font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:700;color:#278657;margin-bottom:10px;padding-right:16px;">New Arrivals</div>
+            <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;padding-right:16px;scrollbar-width:none;">
               ${['7d5c22ab-75e1-4695-b702-a9244089fe5b','a8bf1e8f-e7f4-451d-bef8-660b847f2f41','4bc97ed6-d4da-4ed8-908a-7be0b3aba4d8','f2a46a9f-747a-4377-aaf0-f637d30619b5'].map((h,i) => `
               <div style="width:80px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;">
                 <div style="width:80px;height:80px;border-radius:6px;background:#f5f5f7;position:relative;overflow:hidden;">
@@ -4972,42 +5122,12 @@
       zone.id = zoneId;
       zone.className = 'section-hover-zone';
       zone.dataset.section = config.sectionKey + '-' + _addedSectionIdx;
-      const sectionKey = zone.dataset.section;
-      zone.innerHTML = typeof config.html === 'function' ? config.html(sectionKey) : config.html;
+      zone.innerHTML = config.html;
 
       // Wire up hover/click events
       zone.addEventListener('mouseenter', () => showActions(zone));
       zone.addEventListener('mouseleave', scheduleHideActions);
       zone.addEventListener('click',      () => selectCanvasSection(zone));
-
-      // Build and register a props-panel view if the config provides a template
-      if (config.propsView) {
-        const viewId = 'view-' + sectionKey;
-
-        const view = document.createElement('div');
-        view.className  = 'section-view';
-        view.id         = viewId;
-        view.style.display = 'none';
-        view.innerHTML  = config.propsView(sectionKey, config.outlineLabel);
-
-        // Wire "Add block" button
-        const addBlockBtn = view.querySelector('.js-add-block-btn');
-        if (addBlockBtn) {
-          addBlockBtn.addEventListener('click', () => openAddElementPanel(sectionKey, config.outlineLabel));
-        }
-
-        document.querySelector('.props-panel__inner').appendChild(view);
-
-        SECTION_VIEW_MAP[sectionKey] = viewId;
-        SECTION_LABELS[sectionKey]   = config.outlineLabel;
-
-        // Attach drag handles to the block rows
-        view.querySelectorAll('.props-fields-group').forEach(g => {
-          if (g.querySelector('.prop-element-row') && typeof window.initPropContainer === 'function') {
-            window.initPropContainer(g);
-          }
-        });
-      }
 
       // Insert before about-zone so it appears naturally in the body
       const frame     = document.getElementById('device-frame');
@@ -5015,35 +5135,24 @@
       if (aboutZone) frame.insertBefore(zone, aboutZone);
       else            frame.appendChild(zone);
 
-      // Add an outline item in the Body section before the Add-section button
-      const outlineContainer = document.getElementById('outline-body-container');
-      const addBtn           = document.getElementById('outline-body-add-btn');
-      if (outlineContainer && addBtn) {
-        const item = document.createElement('div');
-        item.className = 'outline-item outline-item--flash';
-        item.innerHTML = `
-          <span class="outline-item__icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2.5 4.5H13.5M2.5 8H11M2.5 11.5H12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <span class="outline-item__label">${config.outlineLabel}</span>
-          <button class="outline-item__vis" title="Toggle visibility" onclick="event.stopPropagation();this.classList.toggle('hidden')">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 7C1 7 3 3 7 3C11 3 13 7 13 7C13 7 11 11 7 11C3 11 1 7 1 7Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              <circle cx="7" cy="7" r="1.5" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
-          </button>`;
-        item.addEventListener('click', () => {
-          document.querySelectorAll('.outline-item, .outline-subitem').forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-          selectCanvasSection(zone);
-          const canvas   = document.getElementById('canvas');
-          const zoneRect = zone.getBoundingClientRect();
-          const canvasRect = canvas.getBoundingClientRect();
-          canvas.scrollBy({ top: zoneRect.top - canvasRect.top - 24, behavior: 'smooth' });
-        });
-        outlineContainer.insertBefore(item, addBtn);
+      // Add an outline section group before the footer divider
+      const bodySections = document.getElementById('outline-body-sections');
+      const footerDivider = bodySections.nextElementSibling;
+      if (bodySections && footerDivider) {
+        const slug = config.outlineLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const sectionId = slug || 'custom';
+        const group = document.createElement('div');
+        group.className = 'outline-section-group outline-item--flash';
+        group.dataset.sectionId = sectionId;
+        group.innerHTML = `
+          <div class="outline-section-label-row" onclick="selectSectionGroup('${sectionId}')">
+            <span class="outline-section-label-row__text">${config.outlineLabel}</span>
+            <button class="outline-section-label-row__opts" title="Options" onclick="event.stopPropagation()"><svg width="16" height="16"><use href="#ids-icon-options"/></svg></button>
+          </div>`;
+        const divider = document.createElement('div');
+        divider.className = 'outline-divider';
+        bodySections.appendChild(divider);
+        bodySections.appendChild(group);
       }
 
       // Close add panel and scroll to the new section
@@ -5127,7 +5236,11 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:10px 0;';
-        el.innerHTML = `          <p style="font-size:13px;color:inherit;line-height:1.6;font-family:inherit;margin:0;opacity:0.85;">
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <p style="font-size:13px;color:inherit;line-height:1.6;font-family:inherit;margin:0;opacity:0.85;">
             Add your text here. Click to edit this block and customize the content for your audience.
           </p>`;
         return el;
@@ -5136,7 +5249,11 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:10px 0;display:flex;';
-        el.innerHTML = `          <button style="background:#f8c358;border:none;border-radius:4px;padding:9px 18px;font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:700;color:#242529;cursor:pointer;">
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <button style="background:#f8c358;border:none;border-radius:4px;padding:9px 18px;font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:700;color:#242529;cursor:pointer;">
             Button label
           </button>`;
         return el;
@@ -5145,14 +5262,22 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:10px 0;';
-        el.innerHTML = `          <hr style="border:none;border-top:1px solid rgba(128,128,128,0.35);margin:0;">`;
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <hr style="border:none;border-top:1px solid rgba(128,128,128,0.35);margin:0;">`;
         return el;
       },
       Image: () => {
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:8px 0;';
-        el.innerHTML = `          <div style="width:100%;height:110px;background:rgba(0,0,0,.15);border-radius:8px;border:2px dashed rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;cursor:pointer;">
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div style="width:100%;height:110px;background:rgba(0,0,0,.15);border-radius:8px;border:2px dashed rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;cursor:pointer;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><path d="M2 15l6-6 6 6 3-3 5 5" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="9.5" r="1.5" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/></svg>
             <span style="font-size:11px;color:rgba(255,255,255,.6);font-family:inherit;">Click to upload image</span>
           </div>`;
@@ -5162,7 +5287,11 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:8px 16px;';
-        el.innerHTML = `          <div style="width:100%;height:110px;background:#1C1C1E;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:8px;">
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div style="width:100%;height:110px;background:#1C1C1E;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:8px;">
             <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4.5 3l8 4-8 4V3z" fill="white"/></svg>
             </div>
@@ -5174,7 +5303,11 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:10px 0;display:flex;align-items:center;gap:10px;';
-        el.innerHTML = `          <div style="width:36px;height:36px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div style="width:36px;height:36px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5l2.25 4.5 5 .73-3.625 3.53.855 4.975L9 12.75l-4.48 2.455.855-4.975L1.75 6.73l5-.73L9 1.5z" stroke="rgba(255,255,255,.85)" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <span style="font-size:13px;color:rgba(255,255,255,.9);font-family:inherit;">Icon label</span>`;
@@ -5184,7 +5317,11 @@
         const el = document.createElement('div');
         el.className = 'injected-block injected-block--new';
         el.style.cssText = 'padding:10px 0;display:flex;flex-direction:column;gap:8px;';
-        el.innerHTML = `          <a href="#" style="font-size:12px;color:rgba(255,255,255,.9);text-decoration:underline;font-weight:600;font-family:inherit;" onclick="return false;">Learn more →</a>
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <a href="#" style="font-size:12px;color:rgba(255,255,255,.9);text-decoration:underline;font-weight:600;font-family:inherit;" onclick="return false;">Learn more →</a>
           <a href="#" style="font-size:12px;color:rgba(255,255,255,.9);text-decoration:underline;font-weight:600;font-family:inherit;" onclick="return false;">Terms &amp; Conditions</a>
           <a href="#" style="font-size:12px;color:rgba(255,255,255,.9);text-decoration:underline;font-weight:600;font-family:inherit;" onclick="return false;">Privacy Policy</a>`;
         return el;
@@ -5207,7 +5344,11 @@
             <div style="height:6px;border-radius:3px;background:rgba(0,0,0,.12);width:100%;"></div>
             <div style="height:6px;border-radius:3px;background:rgba(0,0,0,.08);width:60%;"></div>
           </div>`).join('');
-        el.innerHTML = `          <div style="display:flex;gap:10px;overflow-x:auto;padding-right:16px;padding-bottom:2px;scrollbar-width:none;">${cards}</div>`;
+        el.innerHTML = `
+          <button class="injected-block__delete" onclick="this.closest('.injected-block').remove()" title="Remove block">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div style="display:flex;gap:10px;overflow-x:auto;padding-right:16px;padding-bottom:2px;scrollbar-width:none;">${cards}</div>`;
         return el;
       },
     };
@@ -5220,14 +5361,6 @@
       if (!factory) { closeAddElementPanel(); return; }
 
       const block = factory();
-
-      // Make it behave like a canvas element (hover outline, chip label, click → panel)
-      block.classList.add('canvas-el');
-      const chip = document.createElement('span');
-      chip.className = 'canvas-el-chip';
-      chip.textContent = type;
-      block.prepend(chip);
-      block.addEventListener('click', (e) => selectInjectedBlock(block, type, e));
 
       // Find the last native content child of the zone:
       // skip .section-hover-label, .section-reorder, and already-injected blocks
@@ -5245,138 +5378,11 @@
       }
 
       (container || zone).appendChild(block);
-      if (typeof initBlockDrag === 'function') initBlockDrag(block);
-      addBlockToPanel(block, type, zone.dataset.section);
 
       // Scroll block into view
       setTimeout(() => block.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
 
       closeAddElementPanel();
-    }
-
-    /* ── Injected block selection + panel ── */
-    function selectInjectedBlock(el, type, event) {
-      event.stopPropagation();
-      actionsPopup.classList.remove('visible');
-
-      // Clear any existing canvas-el selection
-      if (selectedCanvasEl) { selectedCanvasEl.classList.remove('el-selected'); selectedCanvasEl = null; }
-
-      // Deselect previous injected block
-      if (_selectedInjectedBlock && _selectedInjectedBlock !== el) {
-        _selectedInjectedBlock.classList.remove('el-selected');
-      }
-      _selectedInjectedBlock = el;
-      el.classList.add('el-selected');
-
-      // Select the parent zone without closing the panel
-      const zone = el.closest('.section-hover-zone');
-      if (zone) {
-        if (selectedZone && selectedZone !== zone) selectedZone.classList.remove('selected');
-        selectedZone = zone;
-        zone.classList.add('selected');
-      }
-
-      // Sync the visible toggle to match block's current visibility
-      const toggle = document.getElementById('injected-block-vis-toggle');
-      if (toggle) toggle.checked = (el.style.opacity !== '0.35');
-
-      // Sync alignment seg buttons to current block text alignment
-      const currentAlign = el.style.textAlign || 'left';
-      document.querySelectorAll('#view-injected-block .prop-seg').forEach((seg, si) => {
-        if (si === 0) { // first seg = alignment
-          const btns = seg.querySelectorAll('.prop-seg__btn');
-          const aligns = ['left','center','right'];
-          btns.forEach((btn, i) => btn.classList.toggle('active', aligns[i] === currentAlign));
-        }
-      });
-
-      // Show the generic block view in the props panel
-      document.querySelectorAll('.section-view').forEach(v => v.style.display = 'none');
-      document.getElementById('view-injected-block').style.display = 'flex';
-
-      // Element-level header
-      document.getElementById('props-header-section').style.display = 'none';
-      document.getElementById('props-header-element').style.display = 'flex';
-      document.getElementById('props-element-title').textContent = type;
-
-      propsPanel.classList.add('open');
-      positionPropPanel();
-    }
-
-    function setInjectedBlockAlign(btn, align) {
-      toggleSeg(btn);
-      if (_selectedInjectedBlock) {
-        _selectedInjectedBlock.style.textAlign = align;
-        _selectedInjectedBlock.style.alignItems = align === 'center' ? 'center' : align === 'right' ? 'flex-end' : 'flex-start';
-      }
-    }
-
-    function setInjectedBlockPadding(btn, padding) {
-      toggleSeg(btn);
-      if (_selectedInjectedBlock) {
-        _selectedInjectedBlock.style.padding = padding;
-      }
-    }
-
-    function setInjectedBlockVisible(checked) {
-      if (_selectedInjectedBlock) {
-        _selectedInjectedBlock.style.opacity = checked ? '' : '0.35';
-        _selectedInjectedBlock.style.pointerEvents = checked ? '' : 'none';
-      }
-    }
-
-    function removeSelectedInjectedBlock() {
-      if (_selectedInjectedBlock) {
-        const blockId = _selectedInjectedBlock.id;
-        if (blockId) {
-          const row = document.querySelector(`.prop-element-row[data-canvas-el="${blockId}"]`);
-          if (row) row.remove();
-        }
-        _selectedInjectedBlock.remove();
-        _selectedInjectedBlock = null;
-        closePropPanel();
-      }
-    }
-
-    const BLOCK_ROW_ICONS = {
-      Text:    `<path d="M2 4.5H14M2 8H11M2 11.5H13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`,
-      Button:  `<rect x="1.5" y="5" width="13" height="6" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8H10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`,
-      Divider: `<path d="M2 8H14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`,
-      Image:   `<rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 10.5L5 7.5L8 10L10.5 7.5L14.5 11.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.5" cy="6" r="1.2" fill="currentColor"/>`,
-      Video:   `<rect x="1.5" y="3" width="13" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M6.5 6L10.5 8L6.5 10V6Z" fill="currentColor"/>`,
-      Icon:    `<path d="M8 2l1.8 3.6L14 6.2l-3 2.9.7 4.1L8 11.1l-3.7 2.1.7-4.1-3-2.9 4.2-.6L8 2z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>`,
-      Links:   `<path d="M5.5 8h5M3 6a2 2 0 0 1 0 4h-1a2 2 0 0 1 0-4h1M13 6a2 2 0 0 1 0 4h-1a2 2 0 0 1 0-4h1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>`,
-      Product: `<rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.2"/>`,
-    };
-
-    function addBlockToPanel(block, type, sectionId) {
-      if (!block.id) {
-        block.id = 'ib-' + Date.now() + '-' + Math.floor(Math.random() * 9999);
-      }
-      const sectionView = document.getElementById('view-' + sectionId);
-      if (!sectionView) return;
-      let blocksGroup = null;
-      sectionView.querySelectorAll('.props-fields-group').forEach(g => {
-        const lbl = g.querySelector('.props-section-label');
-        if (lbl && lbl.textContent.trim() === 'Elements') blocksGroup = g;
-      });
-      if (!blocksGroup) return;
-
-      const row = document.createElement('div');
-      row.className = 'prop-element-row';
-      row.dataset.canvasEl = block.id;
-      row.innerHTML = `
-        <svg class="prop-element-row__icon" width="16" height="16" viewBox="0 0 16 16" fill="none">${BLOCK_ROW_ICONS[type] || BLOCK_ROW_ICONS.Text}</svg>
-        <span class="prop-element-row__label">${type}</span>
-        <svg class="prop-element-row__chev" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 4.5L10 8L6.5 11.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      `;
-      row.addEventListener('click', e => selectInjectedBlock(block, type, e));
-
-      const addBtn = blocksGroup.querySelector('.outline-add-btn');
-      blocksGroup.insertBefore(row, addBtn || null);
-
-      if (typeof initPropRow === 'function') initPropRow(row);
     }
 
     /* ── Spacing controls ── */
@@ -5468,7 +5474,7 @@
       seg.querySelectorAll('.prop-seg__btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      // Hide all mode panels, then reveal the active one
+      // Hide all three mode panels, then reveal the active one
       ['auto', 'fixed', 'dynamic'].forEach(m => {
         const panel = document.getElementById(section + '-source-' + m);
         if (panel) panel.setAttribute('hidden', '');
@@ -5486,62 +5492,64 @@
       // Lock the purple selection so it persists after the popup closes
       selectCanvasSection(activeZone);
 
-      // Select outline item
-      document.querySelectorAll('.outline-item').forEach(i => i.classList.remove('active'));
-
-      const itemMap = {
-        navigation: document.querySelector('[onclick*="navigation"]'),
-        hero:       document.querySelector('[onclick*="\'hero\'"]'),
-        weekly:     document.querySelector('[onclick*="weekly"]'),
-        curated:    document.querySelector('[onclick*="curated"]'),
-      };
-      if (itemMap[section]) itemMap[section].classList.add('active');
+      // Select outline group
+      document.querySelectorAll('.outline-section-group').forEach(g => g.classList.remove('outline-section-group--active'));
+      document.querySelectorAll('.outline-sub-item').forEach(i => i.classList.remove('active'));
+      const group = document.querySelector(`.outline-section-group[data-section-id="${section}"]`);
+      if (group) group.classList.add('outline-section-group--active');
+      const subItem = document.querySelector(`.outline-sub-item[data-section-id="${section}"]`);
+      if (subItem) subItem.classList.add('active');
 
       // Open properties panel
       openPropPanel(section);
     }
 
     /* ── Outline section selection ── */
+    const OUTLINE_ZONE_MAP = {
+      navigation: 'navigation-zone',
+      hero:       'hero-zone',
+      weekly:     'weekly-zone',
+      curated:    'curated-zone',
+      about:      'about-zone',
+      footer:     'curated-zone',
+    };
+
+    function scrollOutlineToSection(sectionId) {
+      const zoneId = OUTLINE_ZONE_MAP[sectionId];
+      if (!zoneId) return;
+      const canvas = document.getElementById('canvas');
+      const zone   = document.getElementById(zoneId);
+      if (!canvas || !zone) return;
+      if (selectedZone && selectedZone !== zone) selectedZone.classList.remove('selected');
+      selectedZone = zone;
+      zone.classList.add('selected');
+      const canvasRect = canvas.getBoundingClientRect();
+      const zoneRect   = zone.getBoundingClientRect();
+      canvas.scrollBy({ top: zoneRect.top - canvasRect.top - 24, behavior: 'smooth' });
+    }
+
+    function setOutlineActive(sectionId, el) {
+      document.querySelectorAll('.outline-section-group').forEach(g => {
+        g.classList.toggle('outline-section-group--active', g.dataset.sectionId === sectionId);
+      });
+      document.querySelectorAll('.outline-sub-item').forEach(i => i.classList.remove('active'));
+      if (el && el.classList.contains('outline-sub-item')) el.classList.add('active');
+    }
+
+    function selectSectionGroup(sectionId) {
+      if (currentSectionId && currentSectionId !== sectionId) closePropPanel();
+      else _showSectionHeader();
+      currentSectionId = sectionId;
+      setOutlineActive(sectionId);
+      scrollOutlineToSection(sectionId);
+    }
+
     function selectSection(el, sectionId) {
-      // Clear all active states
-      document.querySelectorAll('.outline-item, .outline-subitem').forEach(i => i.classList.remove('active'));
-      el.classList.add('active');
-
-      // Close props panel when switching to a different section
-      if (currentSectionId && currentSectionId !== sectionId) {
-        closePropPanel();
-      } else {
-        // Same section: just reset to section header level if panel is open
-        _showSectionHeader();
-      }
-
-      // Scroll canvas so the selected section appears at the top — creating a visual
-      // connection between the outline panel entry and the section on screen.
-      const sectionMap = {
-        navigation: 'navigation-zone',
-        hero:       'hero-zone',
-        weekly:     'weekly-zone',
-        curated:    'curated-zone',
-        about:      'about-zone',
-        footer:     'curated-zone',
-      };
-      const zoneId = sectionMap[sectionId];
-      if (zoneId) {
-        const canvas = document.getElementById('canvas');
-        const zone   = document.getElementById(zoneId);
-        if (canvas && zone) {
-          // Apply the same purple selection ring used when clicking on canvas
-          if (selectedZone && selectedZone !== zone) selectedZone.classList.remove('selected');
-          selectedZone = zone;
-          zone.classList.add('selected');
-
-          // Scroll so the zone top sits 24px below the canvas top edge
-          const canvasRect = canvas.getBoundingClientRect();
-          const zoneRect   = zone.getBoundingClientRect();
-          const delta = zoneRect.top - canvasRect.top - 24;
-          canvas.scrollBy({ top: delta, behavior: 'smooth' });
-        }
-      }
+      if (currentSectionId && currentSectionId !== sectionId) closePropPanel();
+      else _showSectionHeader();
+      currentSectionId = sectionId;
+      setOutlineActive(sectionId, el);
+      scrollOutlineToSection(sectionId);
     }
 
     /* ── Outline element click (subitem → opens element panel) ── */
@@ -5854,167 +5862,6 @@
       list.appendChild(newItem);
       closeSaveTemplateModal();
     }
-
-    /* ══════════════════════════════════════════════════════
-       DRAG-TO-REORDER
-       Uses container-level dragover/drop so gaps between items
-       and the indicator line itself never swallow events.
-       ══════════════════════════════════════════════════════ */
-    (function () {
-      const GRIP = `<svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor" aria-hidden="true"><circle cx="3" cy="2.5" r="1.2"/><circle cx="7" cy="2.5" r="1.2"/><circle cx="3" cy="7" r="1.2"/><circle cx="7" cy="7" r="1.2"/><circle cx="3" cy="11.5" r="1.2"/><circle cx="7" cy="11.5" r="1.2"/></svg>`;
-
-      /* ── 1. Prop-panel row reorder ── */
-      const propLine = document.createElement('div');
-      propLine.className = 'drop-indicator drop-indicator--prop';
-
-      let propSrc = null;
-
-      // Mirror panel row order onto the canvas — only when all mapped elements share a parent
-      function syncCanvasToRows(container) {
-        const canvasEls = Array.from(container.querySelectorAll(':scope > .prop-element-row'))
-          .map(r => r.dataset.canvasEl ? document.getElementById(r.dataset.canvasEl) : null)
-          .filter(Boolean);
-        if (canvasEls.length < 2) return;
-        const parent = canvasEls[0].parentElement;
-        if (!parent || !canvasEls.every(el => el.parentElement === parent)) return;
-        canvasEls.forEach(el => parent.appendChild(el));
-      }
-
-      // Return the row to insert before, or null to append at end
-      function propInsertTarget(container, clientY) {
-        for (const row of container.querySelectorAll(':scope > .prop-element-row')) {
-          if (row === propSrc) continue;
-          const r = row.getBoundingClientRect();
-          if (clientY < r.top + r.height / 2) return row;
-        }
-        return null;
-      }
-
-      // Initialise drag on a single prop row — idempotent (safe to call on new rows)
-      function initPropRow(row) {
-        if (row.dataset.dragInit) return;
-        row.dataset.dragInit = '1';
-        const handle = document.createElement('span');
-        handle.className = 'drag-handle prop-drag-handle';
-        handle.innerHTML = GRIP;
-        handle.addEventListener('click',     e => e.stopPropagation());
-        handle.addEventListener('mousedown', e => e.stopPropagation());
-        row.prepend(handle);
-        row.setAttribute('draggable', 'true');
-        row.addEventListener('dragstart', e => {
-          propSrc = row;
-          e.dataTransfer.effectAllowed = 'move';
-          e.dataTransfer.setData('text/plain', '');
-          requestAnimationFrame(() => row.classList.add('dragging-row'));
-        });
-        row.addEventListener('dragend', () => {
-          row.classList.remove('dragging-row');
-          propSrc = null;
-          propLine.remove();
-        });
-      }
-      window.initPropRow = initPropRow;
-
-      function initPropContainer(container) {
-        window.initPropContainer = initPropContainer; // expose after definition
-        container.querySelectorAll('.prop-element-row').forEach(initPropRow);
-
-        // Container handles dragover/drop — covers gaps and the indicator itself
-        container.addEventListener('dragover', e => {
-          if (!propSrc || !container.contains(propSrc)) return;
-          e.preventDefault();
-          e.dataTransfer.dropEffect = 'move';
-          container.insertBefore(propLine, propInsertTarget(container, e.clientY));
-        });
-        container.addEventListener('drop', e => {
-          if (!propSrc || !container.contains(propSrc)) return;
-          e.preventDefault();
-          container.insertBefore(propSrc, propInsertTarget(container, e.clientY));
-          propLine.remove();
-          syncCanvasToRows(container);
-        });
-        container.addEventListener('dragleave', e => {
-          if (!container.contains(e.relatedTarget)) propLine.remove();
-        });
-      }
-
-      // Every props-fields-group that has at least one prop-element-row
-      document.querySelectorAll('.props-fields-group').forEach(g => {
-        if (g.querySelector('.prop-element-row')) initPropContainer(g);
-      });
-
-      /* ── 2. Canvas injected-block reorder ── */
-      const canvasLine = document.createElement('div');
-      canvasLine.className = 'drop-indicator drop-indicator--canvas';
-
-      let blockSrc = null;
-      let blockOk  = false; // true only when drag starts from the grip handle
-
-      function canvasInsertTarget(container, clientY) {
-        for (const block of container.querySelectorAll(':scope > .injected-block')) {
-          if (block === blockSrc) continue;
-          const r = block.getBoundingClientRect();
-          if (clientY < r.top + r.height / 2) return block;
-        }
-        return null;
-      }
-
-      function initCanvasContainer(container) {
-        container.addEventListener('dragover', e => {
-          if (!blockSrc || !container.contains(blockSrc)) return;
-          e.preventDefault();
-          e.dataTransfer.dropEffect = 'move';
-          container.insertBefore(canvasLine, canvasInsertTarget(container, e.clientY));
-        });
-        container.addEventListener('drop', e => {
-          if (!blockSrc || !container.contains(blockSrc)) return;
-          e.preventDefault();
-          container.insertBefore(blockSrc, canvasInsertTarget(container, e.clientY));
-          canvasLine.remove();
-        });
-        container.addEventListener('dragleave', e => {
-          if (!container.contains(e.relatedTarget)) canvasLine.remove();
-        });
-      }
-
-      window.initBlockDrag = function (block) {
-        // Add grip handle inside the chip
-        const chip = block.querySelector('.canvas-el-chip');
-        if (chip) {
-          const h = document.createElement('span');
-          h.className = 'drag-handle block-drag-handle';
-          h.innerHTML = GRIP;
-          h.addEventListener('click', e => e.stopPropagation());
-          h.addEventListener('mousedown', () => { blockOk = true; });
-          chip.prepend(h);
-        }
-
-        block.setAttribute('draggable', 'true');
-        block.addEventListener('dragstart', e => {
-          if (!blockOk) { e.preventDefault(); return; }
-          blockSrc = block;
-          e.dataTransfer.effectAllowed = 'move';
-          e.dataTransfer.setData('text/plain', '');
-          requestAnimationFrame(() => block.classList.add('dragging-block'));
-        });
-        block.addEventListener('dragend', () => {
-          block.classList.remove('dragging-block');
-          blockSrc = null;
-          blockOk  = false;
-          canvasLine.remove();
-        });
-
-        // Init the parent container the first time a block lands in it
-        const container = block.parentElement;
-        if (container && !container.dataset.blockDragInit) {
-          container.dataset.blockDragInit = '1';
-          initCanvasContainer(container);
-        }
-      };
-
-      document.addEventListener('mouseup', () => { blockOk = false; });
-    })();
-
   </script>
 
   <!-- ── Template preview bar ── -->
