@@ -366,15 +366,15 @@
       position: absolute;
       left: 24px;
       top: 24px;
-      width: 271px;
+      width: 280px;
       background: var(--gs-00);
       border-radius: var(--r-interactive);
       box-shadow: var(--shadow-low);
       z-index: 20;
-      padding: 16px 12px;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       max-height: calc(100% - 48px);
       overflow: hidden;
     }
@@ -383,11 +383,15 @@
       gap: 0;
     }
 
+    #outline-main-view {
+      padding: 16px 0;
+    }
+
     .outline-panel__head {
       display: flex;
       align-items: center;
       min-height: 26px;
-      padding: 0 0 10px;
+      padding: 0 16px 8px;
     }
     .outline-panel__head-title {
       font-size: 15px;
@@ -397,6 +401,16 @@
     }
 
     .outline-divider {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      height: 16px;
+      width: 100%;
+    }
+    .outline-divider::before {
+      content: '';
+      display: block;
+      width: 100%;
       height: 1px;
       background: var(--gs-20);
     }
@@ -404,7 +418,7 @@
     .outline-sections {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 0;
     }
 
     .outline-section {
@@ -419,7 +433,7 @@
       color: var(--gs-50);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 10px 0 4px;
+      padding: 10px 16px 4px;
       line-height: 16px;
     }
 
@@ -427,7 +441,10 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      padding-left: 12px;
+      padding: 0 12px 0 24px;
+    }
+
+    #outline-body-container {
       padding-right: 12px;
     }
 
@@ -1549,7 +1566,7 @@
     /* ── Add-section picker panel ── */
     .add-section-panel {
       position: absolute;
-      left: calc(24px + 271px + 12px); /* right of outline panel */
+      left: calc(24px + 280px + 12px); /* right of outline panel */
       top: 24px;
       width: 300px;
       background: var(--gs-00);
@@ -1673,7 +1690,7 @@
     /* ─────────────── ADD PANEL ─────────────── */
     .add-element-panel {
       position: absolute;
-      width: 271px;
+      width: 280px;
       background: var(--gs-00);
       border-radius: 8px;
       box-shadow: var(--shadow-low);
@@ -1698,7 +1715,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 16px 12px 10px;
+      padding: 16px 16px 10px;
       flex-shrink: 0;
     }
     .add-panel-header__back {
@@ -2344,7 +2361,7 @@
     <div class="outline-panel" id="outline-panel">
 
       <!-- VIEW: Outline -->
-      <div id="outline-main-view" style="display:flex;flex-direction:column;gap:8px;flex:1;overflow-y:auto;">
+      <div id="outline-main-view" style="display:flex;flex-direction:column;gap:0;flex:1;overflow-y:auto;">
 
       <!-- Heading -->
       <div class="outline-panel__head">
@@ -4444,7 +4461,7 @@
       const frameRect = frame.getBoundingClientRect();
       const mainRect  = main.getBoundingClientRect();
 
-      const PANEL_W = 271;
+      const PANEL_W = 280;
       const GAP     = 16;
 
       // Space available between the right edge of the device frame and the right edge of builder-main
@@ -5125,7 +5142,7 @@
       const main     = document.querySelector('.builder-main');
       const frameRect = frame.getBoundingClientRect();
       const mainRect  = main.getBoundingClientRect();
-      const PANEL_W = 271;
+      const PANEL_W = 280;
       const GAP     = 16;
       const spaceRight = mainRect.right - frameRect.right;
       if (spaceRight >= PANEL_W + GAP * 2) {
